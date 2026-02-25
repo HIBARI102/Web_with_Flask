@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-lg font-medium">Rooms</h2>
+    <p class="text-3xl mt-4">{{ total_rooms }}</p>
+  </div>
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-lg font-medium">Tickets</h2>
+    <p class="text-3xl mt-4">{{ total_tickets }}</p>
+  </div>
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-lg font-medium">Open Tickets</h2>
+    <p class="text-3xl mt-4 text-red-600">{{ open_tickets }}</p>
+  </div>
+</div>
+
+<div class="mt-8 bg-white p-6 rounded shadow">
+  <h3 class="text-lg font-medium">Quick Actions</h3>
+  <div class="mt-4 space-x-2">
+    <a href="/tickets/add" class="inline-block bg-blue-600 text-white px-4 py-2 rounded">Add Ticket</a>
+    <a href="/rooms/manage" class="inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded">Manage Rooms</a>
+  </div>
+</div>
+{% endblock %}

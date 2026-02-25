@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white p-6 rounded shadow">
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl font-semibold">Rooms</h2>
+    <a href="/rooms/add" class="bg-blue-600 text-white px-3 py-1 rounded">New Room</a>
+  </div>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="text-sm text-gray-600">
+          <th class="p-2">#</th>
+          <th class="p-2">Number</th>
+          <th class="p-2">Floor</th>
+          <th class="p-2">Type</th>
+          <th class="p-2">Created</th>
+          <th class="p-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rooms %}
+        <tr class="border-t">
+          <td class="p-2">{{ r.id }}</td>
+          <td class="p-2">{{ r.number }}</td>
+          <td class="p-2">{{ r.floor or '-' }}</td>
+          <td class="p-2">{{ r.type or '-' }}</td>
+          <td class="p-2">{{ r.created_at.strftime('%Y-%m-%d') }}</td>
+          <td class="p-2">
+            <a href="/rooms/{{ r.id }}" class="text-blue-600 mr-2">View</a>
+            <a href="/rooms/{{ r.id }}/edit" class="text-green-600 mr-2">Edit</a>
+            <form action="/rooms/{{ r.id }}/delete" method="post" class="inline">
+              <button class="text-red-600" onclick="return confirm('Delete room?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td class="p-4" colspan="6">No rooms yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white p-6 rounded shadow max-w-3xl">
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl font-semibold">Room {{ room.number }}</h2>
+    <div class="space-x-2">
+      <a href="/rooms/{{ room.id }}/edit" class="text-green-600">Edit</a>
+      <form action="/rooms/{{ room.id }}/delete" method="post" class="inline">
+        <button class="text-red-600" onclick="return confirm('Delete room?')">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <p class="text-sm text-gray-600">Floor</p>
+    <p class="font-medium">{{ room.floor or '-' }}</p>
+
+    <p class="mt-4 text-sm text-gray-600">Type</p>
+    <p class="font-medium">{{ room.type or '-' }}</p>
+
+    <p class="mt-4 text-sm text-gray-600">Notes</p>
+    <p class="font-medium whitespace-pre-wrap">{{ room.notes or '-' }}</p>
+  </div>
+
+  <div class="mt-6">
+    <h3 class="text-lg font-semibold">Tickets for this room</h3>
+    <div class="mt-4">
+      {% if tickets %}
+        <ul class="space-y-2">
+          {% for t in tickets %}
+            <li>
+              <a href="/tickets/{{ t.id }}" class="text-blue-600">#{{ t.id }} — {{ t.title }}</a>
+              <span class="text-sm text-gray-600">({{ t.status }})</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-sm text-gray-600">No tickets for this room.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -16,7 +16,8 @@ def create_app(config_object=None):
 
     app.config.from_mapping(
         SECRET_KEY=os.environ.get("STAYFIX_SECRET", "dev"),
-        SQLALCHEMY_DATABASE_URI="sqlite:///" + os.path.join(app.instance_path, "stayfix.db"),
+        SQLALCHEMY_DATABASE_URI="sqlite:///"
+        + os.path.join(app.instance_path, "stayfix.db"),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 

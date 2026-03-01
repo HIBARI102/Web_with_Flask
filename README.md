@@ -28,3 +28,29 @@
 | **Auth** | Flask-Login |
 | **Frontend** | Tailwind CSS + Jinja2 Templates |
 | **Icons** | Heroicons / Unicode Emojis |
+
+
+---
+
+## 🚀 Getting Started (วิธีการติดตั้งและรัน)
+
+### 1. เตรียมสภาพแวดล้อม (Environment)
+```bash
+# สร้างและเปิดใช้งาน Virtual Environment
+python -m venv .venv
+.\.venv\Scripts\activate
+```
+2. ติดตั้ง Library และ Database
+```bash
+pip install -r requirements.txt
+flask init-db
+```
+3. เริ่มใช้งานโปรแกรม
+```bash
+python run.py
+```
+เข้าใช้งานผ่าน URL: http://127.0.0.1:5000
+
+
+
+

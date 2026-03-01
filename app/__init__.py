@@ -49,9 +49,11 @@ def create_app(config_object=None):
         try:
             from . import models  # noqa: F401
 
+            @login_manager.user_loader
             def load_user(user_id):
                 try:
                     from .models import User
+
                     return User.query.get(int(user_id))
                 except (Exception, TypeError, ValueError):
                     return None

@@ -62,5 +62,15 @@ python run.py
 
 ---
 © 2026 StayFix Project. Built with 💙 and Python.
+```
 
+---
 
+## 🤖 Development Tools (AI-Assisted)
+
+โปรเจกต์นี้มีการประยุกต์ใช้เครื่องมือ AI เพื่อเพิ่มประสิทธิภาพในการพัฒนา (Productivity):
+* **Google Gemini 1.5 Pro**: ใช้ในการวางโครงสร้าง Logic, ช่วยวิเคราะห์ Error log และออกแบบระบบฐานข้อมูล
+* **GitHub Copilot (VS Code)**: ใช้เป็น AI Pair Programmer ในการช่วยแนะนำ Code Snippets และเขียนคำอธิบายฟังก์ชัน (Docstrings)
+* **ChatGPT/Claude**: ใช้ในการช่วยตรวจสอบความสวยงามของ CSS และการจัดวาง Layout
+
+> *หมายเหตุ: โครงสร้างหลักของแอปพลิเคชันและการแก้ไข Logic ทั้งหมดผ่านการตรวจสอบและปรับปรุงโดยผู้พัฒนาเพื่อให้มั่นใจในความถูกต้อง*

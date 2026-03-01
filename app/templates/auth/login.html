@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
-  <h2 class="text-xl font-semibold mb-4">{{ t('login_heading') }}</h2>
+<div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded shadow border dark:border-gray-700 transition-colors">
+  <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{{ t('login_heading') }}</h2>
+  
   <form method="post" class="space-y-4">
     <div>
-      <label class="block text-sm font-medium">{{ t('username') }}</label>
-      <input name="username" class="w-full border p-2 rounded" autofocus />
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('username') }}</label>
+      <input name="username" 
+             class="w-full border p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none" 
+             autofocus />
     </div>
+    
     <div>
-      <label class="block text-sm font-medium">{{ t('password') }}</label>
-      <input name="password" type="password" class="w-full border p-2 rounded" />
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('password') }}</label>
+      <input name="password" 
+             type="password" 
+             class="w-full border p-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none" />
     </div>
+    
     <div class="flex items-center justify-between">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">{{ t('log_in') }}</button>
-      <a href="/auth/register" class="text-sm text-gray-600">{{ t('register') }}</a>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
+        {{ t('log_in') }}
+      </button>
+      <a href="/auth/register" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">
+        {{ t('register') }}
+      </a>
     </div>
   </form>
 </div>

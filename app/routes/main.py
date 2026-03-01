@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template
-
+from flask import Blueprint, render_template, session, redirect, url_for, request
 from ..models import Room, MaintenanceTicket
 from ..utils import switch_language
 
@@ -28,3 +27,15 @@ def change_language(lang):
 @main_bp.route("/about")
 def about():
     return render_template("main/about.html")
+
+
+@main_bp.route("/toggle-theme")
+def toggle_theme():
+    # ตรวจสอบค่าปัจจุบันใน session ถ้าไม่มีให้เริ่มที่ light
+    current_theme = session.get("theme", "light")
+
+    # สลับค่า
+    session["theme"] = "dark" if current_theme == "light" else "light"
+
+    # กลับไปหน้าเดิมที่กดมา (Redirect back)
+    return redirect(request.referrer or url_for("main.index"))

@@ -93,6 +93,7 @@ def translate(key: str, default: str = None) -> str:
         "delete_room_confirm": {"en": "Delete room?", "th": "ลบห้องหรือไม่?"},
         "newest": {"en": "Newest", "th": "ใหม่ที่สุด"},
         "oldest": {"en": "Oldest", "th": "เก่าที่สุด"},
+        "sort_by": {"en": "SORT BY", "th": "เรียงตาม"},
         # add more keys as needed
     }
     lang = get_locale()

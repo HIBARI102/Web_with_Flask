@@ -16,3 +16,15 @@
 * **🌓 Dark Mode Support**: รองรับการใช้งานทั้งโหมดสว่างและโหมดมืด (Dark Mode) อย่างสมบูรณ์
 * **🌐 Multilingual**: ระบบสลับภาษา ไทย (TH) และ อังกฤษ (EN) ทั่วทั้งแอปพลิเคชัน
 * **📊 Dashboard**: สรุปภาพรวมสถานะตั๋วแจ้งซ่อมที่ยังค้างอยู่ในระบบ
+
+---
+
+## 🛠️ Tech Stack (เครื่องมือที่ใช้)
+
+| ส่วนงาน | เทคโนโลยีที่ใช้ |
+| :--- | :--- |
+| **Backend** | Python 3.13 / Flask Framework |
+| **Database** | SQLite + SQLAlchemy (ORM) |
+| **Auth** | Flask-Login |
+| **Frontend** | Tailwind CSS + Jinja2 Templates |
+| **Icons** | Heroicons / Unicode Emojis |

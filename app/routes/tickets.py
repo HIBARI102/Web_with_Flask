@@ -10,10 +10,25 @@ tickets_bp = Blueprint("tickets", __name__)
 @tickets_bp.route("/")
 @login_required
 def list_tickets():
-    tickets = MaintenanceTicket.query.order_by(
-        MaintenanceTicket.created_at.desc()
-    ).all()
-    return render_template("tickets/list.html", tickets=tickets)
+    # รับค่าจาก URL ถ้าไม่มีให้ default เป็น 'newest'
+    sort_by = request.args.get("sort", "newest")
+
+    query = MaintenanceTicket.query
+
+    # เงื่อนไขการเรียงลำดับ
+    if sort_by == "priority":
+        # เรียงตามความสำคัญ (ต้องระวังว่าใน DB เป็น String อาจจะเรียงตามตัวอักษร)
+        # ถ้าจะให้ดีต้อง map ความสำคัญเป็นตัวเลข แต่อันนี้เรียงเบื้องต้นไปก่อน
+        query = query.order_by(MaintenanceTicket.priority.desc())
+    elif sort_by == "oldest":
+        # เรียงตามความนาน (เก่าไปใหม่)
+        query = query.order_by(MaintenanceTicket.created_at.asc())
+    else:
+        # newest: เรียงตามล่าสุด (ใหม่ไปเก่า)
+        query = query.order_by(MaintenanceTicket.created_at.desc())
+
+    tickets = query.all()
+    return render_template("tickets/list.html", tickets=tickets, current_sort=sort_by)
 
 
 @tickets_bp.route("/add", methods=("GET", "POST"))

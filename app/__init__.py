@@ -36,6 +36,14 @@ def create_app(config_object=None):
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
 
+    # add template helpers for language switching
+    try:
+        from .utils import register_language_helpers
+
+        register_language_helpers(app)
+    except Exception:
+        pass
+
     # Import models so they are registered with SQLAlchemy and wire user loader
     with app.app_context():
         try:

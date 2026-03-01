@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ LANG }}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,14 +11,21 @@
 			<div class="container mx-auto px-4 py-4 flex items-center justify-between">
 				<h1 class="text-xl font-semibold">StayFix</h1>
 				<nav class="space-x-4">
-					<a href="/" class="text-sm text-gray-700 hover:underline">Dashboard</a>
-					<a href="/tickets" class="text-sm text-gray-700 hover:underline">Tickets</a>
-					<a href="/rooms" class="text-sm text-gray-700 hover:underline">Rooms</a>
-					<a href="/about" class="text-sm text-gray-700 hover:underline">About</a>				{% if current_user.is_authenticated %}
-				  <a href="{{ url_for('auth.logout') }}" class="text-sm text-gray-700 hover:underline">Logout</a>
-				{% else %}
-				  <a href="{{ url_for('auth.login') }}" class="text-sm text-gray-700 hover:underline">Login</a>
-				{% endif %}				</nav>
+                        <a href="/" class="text-sm text-gray-700 hover:underline">{{ t('dashboard') }}</a>
+                        <a href="/tickets" class="text-sm text-gray-700 hover:underline">{{ t('tickets') }}</a>
+                        <a href="/rooms" class="text-sm text-gray-700 hover:underline">{{ t('rooms') }}</a>
+                        <a href="/about" class="text-sm text-gray-700 hover:underline">{{ t('about') }}</a>
+                        {% if current_user.is_authenticated %}
+                          <a href="{{ url_for('auth.logout') }}" class="text-sm text-gray-700 hover:underline">{{ t('logout') }}</a>
+                        {% else %}
+                          <a href="{{ url_for('auth.login') }}" class="text-sm text-gray-700 hover:underline">{{ t('login') }}</a>
+                        {% endif %}
+                        <!-- language toggle -->
+                        <span class="ml-4 text-sm">
+                            <a href="{{ url_for('main.change_language', lang='en') }}" class="hover:underline">EN</a> |
+                            <a href="{{ url_for('main.change_language', lang='th') }}" class="hover:underline">TH</a>
+                        </span>
+                    </nav>
 			</div>
 		</header>
 

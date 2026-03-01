@@ -51,6 +51,16 @@ python run.py
 ```
 เข้าใช้งานผ่าน URL: http://127.0.0.1:5000
 
+```markdown
+---
 
+## 👨‍💻 Developer Information
+
+* **Name**: คุณัชญ์ ทวีรัตน์
+* **Student ID**: 6810110038
+* **Project**: Web Development with Flask Framework (StayFix)
+
+---
+© 2026 StayFix Project. Built with 💙 and Python.
 
 

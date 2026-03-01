@@ -2,21 +2,21 @@
 
 {% block content %}
 <div class="bg-white p-6 rounded shadow max-w-2xl">
-  <h2 class="text-xl font-semibold">{{ 'Edit Ticket' if ticket else 'New Ticket' }}</h2>
+  <h2 class="text-xl font-semibold">{{ t('edit_ticket') if ticket else t('new_ticket') }}</h2>
   <form method="post" class="mt-4 space-y-4">
     <div>
-      <label class="block text-sm font-medium">Title</label>
+      <label class="block text-sm font-medium">{{ t('title') }}</label>
       <input name="title" value="{{ ticket.title if ticket else '' }}" class="w-full border p-2 rounded" />
     </div>
 
     <div>
-      <label class="block text-sm font-medium">Description</label>
+      <label class="block text-sm font-medium">{{ t('description','Description') if false else 'Description' }}</label>
       <textarea name="description" class="w-full border p-2 rounded">{{ ticket.description if ticket else '' }}</textarea>
     </div>
 
     <div class="grid grid-cols-2 gap-4">
       <div>
-        <label class="block text-sm font-medium">Priority</label>
+        <label class="block text-sm font-medium">{{ t('priority') }}</label>
         <select name="priority" class="w-full border p-2 rounded">
           {% for p in ['Low','Normal','High'] %}
           <option value="{{ p }}" {% if ticket and ticket.priority==p %}selected{% endif %}>{{ p }}</option>
@@ -25,7 +25,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium">Status</label>
+        <label class="block text-sm font-medium">{{ t('status') }}</label>
         <select name="status" class="w-full border p-2 rounded">
           {% for s in ['Open','In Progress','Resolved','Closed'] %}
           <option value="{{ s }}" {% if ticket and ticket.status==s %}selected{% endif %}>{{ s }}</option>
@@ -35,12 +35,12 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium">Assign To</label>
+      <label class="block text-sm font-medium">{{ t('assigned_to_label') }}</label>
       <input name="assigned_to" value="{{ ticket.assigned_to if ticket else '' }}" class="w-full border p-2 rounded" />
     </div>
 
     <div>
-      <label class="block text-sm font-medium">Room</label>
+      <label class="block text-sm font-medium">{{ t('room') }}</label>
       <select name="room_id" class="w-full border p-2 rounded">
         <option value="">-- Unassigned --</option>
         {% for r in rooms %}
@@ -50,8 +50,8 @@
     </div>
 
     <div class="flex items-center space-x-2">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
-      <a href="/tickets" class="text-gray-600">Cancel</a>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">{{ t('save') }}</button>
+      <a href="/tickets" class="text-gray-600">{{ t('cancel') }}</a>
     </div>
   </form>
 </div>

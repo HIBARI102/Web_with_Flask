@@ -3,21 +3,21 @@
 {% block content %}
 <div class="bg-white p-6 rounded shadow">
   <div class="flex items-center justify-between">
-    <h2 class="text-xl font-semibold">Tickets</h2>
-    <a href="/tickets/add" class="bg-blue-600 text-white px-3 py-1 rounded">New Ticket</a>
+    <h2 class="text-xl font-semibold">{{ t('tickets_label') }}</h2>
+    <a href="/tickets/add" class="bg-blue-600 text-white px-3 py-1 rounded">{{ t('new_ticket') }}</a>
   </div>
 
   <div class="mt-4 overflow-x-auto">
     <table class="w-full text-left">
       <thead>
         <tr class="text-sm text-gray-600">
-          <th class="p-2">ID</th>
-          <th class="p-2">Title</th>
-          <th class="p-2">Room</th>
-          <th class="p-2">Status</th>
-          <th class="p-2">Assigned</th>
-          <th class="p-2">Created</th>
-          <th class="p-2">Actions</th>
+          <th class="p-2">{{ t('id') }}</th>
+          <th class="p-2">{{ t('title') }}</th>
+          <th class="p-2">{{ t('room') }}</th>
+          <th class="p-2">{{ t('status') }}</th>
+          <th class="p-2">{{ t('assigned') }}</th>
+          <th class="p-2">{{ t('created') }}</th>
+          <th class="p-2">{{ t('actions') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -39,7 +39,7 @@
         </tr>
         {% else %}
         <tr>
-          <td class="p-4" colspan="7">No tickets yet.</td>
+          <td class="p-4" colspan="7">{{ t('no_tickets') }}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -7,6 +7,12 @@ from ..models import Room, MaintenanceTicket
 rooms_bp = Blueprint("rooms", __name__)
 
 
+@rooms_bp.route("/manage")
+def manage_rooms_redirect():
+    # old dashboard link used '/rooms/manage'; redirect to the actual list view
+    return redirect(url_for("rooms.list_rooms"))
+
+
 @rooms_bp.route("/")
 def list_rooms():
     rooms = Room.query.order_by(Room.number).all()

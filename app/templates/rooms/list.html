@@ -9,8 +9,8 @@
     </a>
   </div>
 
-  <div class="mt-4 overflow-x-auto">
-    <table class="w-full text-left">
+  <div class="overflow-x-auto rounded-lg border dark:border-gray-700">
+    <table class="w-full text-left border-collapse">
       <thead>
         <tr class="text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/50">
           <th class="p-4 font-semibold">#</th>
@@ -21,25 +21,34 @@
           <th class="p-4 font-semibold text-center">{{ t('actions') }}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="divide-y dark:divide-gray-700">
         {% for r in rooms %}
-        <tr class="border-t">
-          <td class="p-2">{{ r.id }}</td>
-          <td class="p-2">{{ r.number }}</td>
-          <td class="p-2">{{ r.floor or '-' }}</td>
-          <td class="p-2">{{ r.type or '-' }}</td>
-          <td class="p-2">{{ r.created_at.strftime('%Y-%m-%d') }}</td>
-          <td class="p-2">
-            <a href="/rooms/{{ r.id }}" class="text-blue-600 mr-2">View</a>
-            <a href="/rooms/{{ r.id }}/edit" class="text-green-600 mr-2">Edit</a>
-            <form action="/rooms/{{ r.id }}/delete" method="post" class="inline">
-              <button class="text-red-600" onclick="return confirm('Delete room?')">Delete</button>
-            </form>
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors text-gray-700 dark:text-gray-300">
+          <td class="p-4 text-sm">{{ r.id }}</td>
+          <td class="p-4 font-medium text-gray-900 dark:text-white">{{ r.number }}</td>
+          <td class="p-4 text-sm">{{ r.floor or '-' }}</td>
+          <td class="p-4 text-sm">
+            <span class="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs">
+              {{ r.type or '-' }}
+            </span>
+          </td>
+          <td class="p-4 text-sm text-gray-500 dark:text-gray-400">{{ r.created_at.strftime('%Y-%m-%d') }}</td>
+          <td class="p-4 text-sm text-center">
+            <div class="flex justify-center space-x-3">
+              <a href="/rooms/{{ r.id }}" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">View</a>
+              <a href="/rooms/{{ r.id }}/edit" class="text-green-600 dark:text-green-400 hover:underline font-medium">Edit</a>
+              <form action="/rooms/{{ r.id }}/delete" method="post" class="inline">
+                <button class="text-red-600 dark:text-red-400 hover:underline font-medium" 
+                        onclick="return confirm('Delete room?')">Delete</button>
+              </form>
+            </div>
           </td>
         </tr>
         {% else %}
         <tr>
-          <td class="p-4" colspan="6">{{ t('no_rooms') }}</td>
+          <td class="p-10 text-center text-gray-500 dark:text-gray-400 italic" colspan="6">
+            {{ t('no_rooms') }}
+          </td>
         </tr>
         {% endfor %}
       </tbody>

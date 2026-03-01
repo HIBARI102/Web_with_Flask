@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="bg-white p-6 rounded shadow max-w-2xl">
-  <h2 class="text-xl font-semibold">{{ t('edit_ticket') if ticket else t('new_ticket') }}</h2>
-  <form method="post" class="mt-4 space-y-4">
+<div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-100 dark:border-gray-700 max-w-2xl mx-auto transition-colors">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white border-b dark:border-gray-700 pb-4">
+    {{ t('edit_ticket') if ticket else t('new_ticket') }}
+  </h2>
+
+  <form method="post" class="mt-6 space-y-6">
     <div>
-      <label class="block text-sm font-medium">{{ t('title') }}</label>
-      <input name="title" value="{{ ticket.title if ticket else '' }}" class="w-full border p-2 rounded" />
+      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('title') }}</label>
+      <input name="title" 
+             value="{{ ticket.title if ticket else '' }}" 
+             class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all" 
+             placeholder="ระบุหัวข้อปัญหา..." required />
     </div>
 
     <div>
-      <label class="block text-sm font-medium">{{ t('description','Description') if false else 'Description' }}</label>
-      <textarea name="description" class="w-full border p-2 rounded">{{ ticket.description if ticket else '' }}</textarea>
+      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('description_label') }}</label>
+      <textarea name="description" 
+                rows="4"
+                class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                placeholder="รายละเอียดเพิ่มเติม...">{{ ticket.description if ticket else '' }}</textarea>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label class="block text-sm font-medium">{{ t('priority') }}</label>
-        <select name="priority" class="w-full border p-2 rounded">
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('priority') }}</label>
+        <select name="priority" 
+                class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
           {% for p in ['Low','Normal','High'] %}
           <option value="{{ p }}" {% if ticket and ticket.priority==p %}selected{% endif %}>{{ p }}</option>
           {% endfor %}
@@ -25,8 +35,9 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium">{{ t('status') }}</label>
-        <select name="status" class="w-full border p-2 rounded">
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('status') }}</label>
+        <select name="status" 
+                class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
           {% for s in ['Open','In Progress','Resolved','Closed'] %}
           <option value="{{ s }}" {% if ticket and ticket.status==s %}selected{% endif %}>{{ s }}</option>
           {% endfor %}
@@ -35,23 +46,35 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium">{{ t('assigned_to_label') }}</label>
-      <input name="assigned_to" value="{{ ticket.assigned_to if ticket else '' }}" class="w-full border p-2 rounded" />
+      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('assigned_to_label') }}</label>
+      <input name="assigned_to" 
+             value="{{ ticket.assigned_to if ticket else '' }}" 
+             class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all" 
+             placeholder="ระบุชื่อผู้รับผิดชอบ" />
     </div>
 
     <div>
-      <label class="block text-sm font-medium">{{ t('room') }}</label>
-      <select name="room_id" class="w-full border p-2 rounded">
-        <option value="">-- Unassigned --</option>
+      <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('room') }}</label>
+      <select name="room_id" 
+              class="w-full border p-2.5 rounded bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+        <option value="">-- {{ t('unassigned') }} --</option>
         {% for r in rooms %}
-        <option value="{{ r.id }}" {% if ticket and ticket.room_id==r.id %}selected{% endif %}>{{ r.number }}</option>
+        <option value="{{ r.id }}" {% if ticket and ticket.room_id==r.id %}selected{% endif %}>
+          {{ t('room_number') }} {{ r.number }}
+        </option>
         {% endfor %}
       </select>
     </div>
 
-    <div class="flex items-center space-x-2">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">{{ t('save') }}</button>
-      <a href="/tickets" class="text-gray-600">{{ t('cancel') }}</a>
+    <div class="flex items-center space-x-4 pt-6 border-t dark:border-gray-700">
+      <button type="submit" 
+              class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-md font-bold shadow-md transition-all active:scale-95">
+        {{ t('save') }}
+      </button>
+      <a href="/tickets" 
+         class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white font-medium transition-colors">
+        {{ t('cancel') }}
+      </a>
     </div>
   </form>
 </div>

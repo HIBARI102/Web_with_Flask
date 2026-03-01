@@ -2,32 +2,32 @@
 
 {% block content %}
 <div class="bg-white p-6 rounded shadow max-w-2xl">
-  <h2 class="text-xl font-semibold">{{ 'Edit Room' if room else 'New Room' }}</h2>
+  <h2 class="text-xl font-semibold">{{ t('edit_room') if room else t('new_room') }}</h2>
   <form method="post" class="mt-4 space-y-4">
     <div>
-      <label class="block text-sm font-medium">Room Number</label>
+      <label class="block text-sm font-medium">{{ t('room_number') }}</label>
       <input name="number" value="{{ room.number if room else '' }}" class="w-full border p-2 rounded" />
     </div>
 
     <div class="grid grid-cols-2 gap-4">
       <div>
-        <label class="block text-sm font-medium">Floor</label>
+        <label class="block text-sm font-medium">{{ t('floor') }}</label>
         <input name="floor" value="{{ room.floor if room and room.floor is not none else '' }}" class="w-full border p-2 rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">Type</label>
+        <label class="block text-sm font-medium">{{ t('type') }}</label>
         <input name="type" value="{{ room.type if room else '' }}" class="w-full border p-2 rounded" />
       </div>
     </div>
 
     <div>
-      <label class="block text-sm font-medium">Notes</label>
+      <label class="block text-sm font-medium">{{ t('notes') }}</label>
       <textarea name="notes" class="w-full border p-2 rounded">{{ room.notes if room else '' }}</textarea>
     </div>
 
     <div class="flex items-center space-x-2">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
-      <a href="/rooms" class="text-gray-600">Cancel</a>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">{{ t('save') }}</button>
+      <a href="/rooms" class="text-gray-600">{{ t('cancel') }}</a>
     </div>
   </form>
 </div>

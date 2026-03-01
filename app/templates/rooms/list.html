@@ -3,8 +3,8 @@
 {% block content %}
 <div class="bg-white p-6 rounded shadow">
   <div class="flex items-center justify-between">
-    <h2 class="text-xl font-semibold">Rooms</h2>
-    <a href="/rooms/add" class="bg-blue-600 text-white px-3 py-1 rounded">New Room</a>
+    <h2 class="text-xl font-semibold">{{ t('rooms_label') }}</h2>
+    <a href="/rooms/add" class="bg-blue-600 text-white px-3 py-1 rounded">{{ t('new_room') }}</a>
   </div>
 
   <div class="mt-4 overflow-x-auto">
@@ -12,11 +12,11 @@
       <thead>
         <tr class="text-sm text-gray-600">
           <th class="p-2">#</th>
-          <th class="p-2">Number</th>
-          <th class="p-2">Floor</th>
-          <th class="p-2">Type</th>
-          <th class="p-2">Created</th>
-          <th class="p-2">Actions</th>
+          <th class="p-2">{{ t('room_number') }}</th>
+          <th class="p-2">{{ t('floor') }}</th>
+          <th class="p-2">{{ t('type') }}</th>
+          <th class="p-2">{{ t('created') }}</th>
+          <th class="p-2">{{ t('actions') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +37,7 @@
         </tr>
         {% else %}
         <tr>
-          <td class="p-4" colspan="6">No rooms yet.</td>
+          <td class="p-4" colspan="6">{{ t('no_rooms') }}</td>
         </tr>
         {% endfor %}
       </tbody>

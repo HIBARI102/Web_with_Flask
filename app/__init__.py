@@ -1,9 +1,12 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 # Package-level DB instance (initialized in create_app)
 db = SQLAlchemy()
+# Login manager
+login_manager = LoginManager()
 
 
 def create_app(config_object=None):
@@ -30,11 +33,21 @@ def create_app(config_object=None):
         pass
 
     db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
 
-    # Import models so they are registered with SQLAlchemy
+    # Import models so they are registered with SQLAlchemy and wire user loader
     with app.app_context():
         try:
             from . import models  # noqa: F401
+
+            @login_manager.user_loader
+            def load_user(user_id):
+                try:
+                    return models.User.query.get(int(user_id))
+                except Exception:
+                    return None
+
         except Exception:
             pass
 
@@ -57,6 +70,13 @@ def create_app(config_object=None):
         from .routes.rooms import rooms_bp
 
         app.register_blueprint(rooms_bp, url_prefix="/rooms")
+    except Exception:
+        pass
+
+    try:
+        from .routes.auth import auth_bp
+
+        app.register_blueprint(auth_bp, url_prefix="/auth")
     except Exception:
         pass
 

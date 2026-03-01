@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask_login import login_required, current_user
 
 from .. import db
 from ..models import Room, MaintenanceTicket
@@ -13,7 +14,11 @@ def list_rooms():
 
 
 @rooms_bp.route("/add", methods=("GET", "POST"))
+@login_required
 def add_room():
+    if getattr(current_user, "role", None) != "admin":
+        abort(403)
+
     if request.method == "POST":
         number = request.form.get("number", "").strip()
         floor = request.form.get("floor")
@@ -50,7 +55,11 @@ def room_detail(room_id):
 
 
 @rooms_bp.route("/<int:room_id>/edit", methods=("GET", "POST"))
+@login_required
 def edit_room(room_id):
+    if getattr(current_user, "role", None) != "admin":
+        abort(403)
+
     room = Room.query.get_or_404(room_id)
     if request.method == "POST":
         number = request.form.get("number", "").strip()
@@ -74,7 +83,11 @@ def edit_room(room_id):
 
 
 @rooms_bp.route("/<int:room_id>/delete", methods=("POST",))
+@login_required
 def delete_room(room_id):
+    if getattr(current_user, "role", None) != "admin":
+        abort(403)
+
     room = Room.query.get_or_404(room_id)
     db.session.delete(room)
     db.session.commit()

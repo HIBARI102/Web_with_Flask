@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask_login import login_required, current_user
 
 from .. import db
 from ..models import MaintenanceTicket, Room
@@ -7,6 +8,7 @@ tickets_bp = Blueprint("tickets", __name__)
 
 
 @tickets_bp.route("/")
+@login_required
 def list_tickets():
     tickets = MaintenanceTicket.query.order_by(
         MaintenanceTicket.created_at.desc()
@@ -15,6 +17,7 @@ def list_tickets():
 
 
 @tickets_bp.route("/add", methods=("GET", "POST"))
+@login_required
 def add_ticket():
     rooms = Room.query.order_by(Room.number).all()
     if request.method == "POST":
@@ -46,12 +49,14 @@ def add_ticket():
 
 
 @tickets_bp.route("/<int:ticket_id>")
+@login_required
 def ticket_detail(ticket_id):
     ticket = MaintenanceTicket.query.get_or_404(ticket_id)
     return render_template("tickets/detail.html", ticket=ticket)
 
 
 @tickets_bp.route("/<int:ticket_id>/edit", methods=("GET", "POST"))
+@login_required
 def edit_ticket(ticket_id):
     ticket = MaintenanceTicket.query.get_or_404(ticket_id)
     rooms = Room.query.order_by(Room.number).all()
@@ -82,7 +87,14 @@ def edit_ticket(ticket_id):
 
 
 @tickets_bp.route("/<int:ticket_id>/delete", methods=("POST",))
+@login_required
 def delete_ticket(ticket_id):
+    if (
+        not current_user.is_authenticated
+        or getattr(current_user, "role", None) != "admin"
+    ):
+        abort(403)
+
     ticket = MaintenanceTicket.query.get_or_404(ticket_id)
     db.session.delete(ticket)
     db.session.commit()

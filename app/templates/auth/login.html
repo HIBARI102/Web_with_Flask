@@ -2,19 +2,19 @@
 
 {% block content %}
 <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
-  <h2 class="text-xl font-semibold mb-4">Log in to StayFix</h2>
+  <h2 class="text-xl font-semibold mb-4">{{ t('login_heading') }}</h2>
   <form method="post" class="space-y-4">
     <div>
-      <label class="block text-sm font-medium">Username</label>
+      <label class="block text-sm font-medium">{{ t('username') }}</label>
       <input name="username" class="w-full border p-2 rounded" autofocus />
     </div>
     <div>
-      <label class="block text-sm font-medium">Password</label>
+      <label class="block text-sm font-medium">{{ t('password') }}</label>
       <input name="password" type="password" class="w-full border p-2 rounded" />
     </div>
     <div class="flex items-center justify-between">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Log in</button>
-      <a href="/auth/register" class="text-sm text-gray-600">Register</a>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">{{ t('log_in') }}</button>
+      <a href="/auth/register" class="text-sm text-gray-600">{{ t('register') }}</a>
     </div>
   </form>
 </div>

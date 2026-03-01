@@ -30,7 +30,7 @@ def switch_language(lang: str):
     return redirect(request.referrer or url_for("main.dashboard"))
 
 
-def translate(key: str) -> str:
+def translate(key: str, default: str = None) -> str:
     """Look up a translation for the given key.
 
     The translation table is intentionally minimal; it only
@@ -94,7 +94,10 @@ def translate(key: str) -> str:
         # add more keys as needed
     }
     lang = get_locale()
-    return table.get(key, {}).get(lang, key)
+    translation = table.get(key, {}).get(lang)
+    if translation:
+        return translation
+    return default if default else key
 
 
 def register_language_helpers(app):

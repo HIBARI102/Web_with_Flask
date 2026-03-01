@@ -1,7 +1,8 @@
 /* app/static/css/style.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* แทนที่ @tailwind base; ด้วย: */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
     --bg-main: #ffffff;
@@ -10,7 +11,7 @@
 
 .dark {
     --bg-main: #1a202c;
-    --text-main: #f7fafc;
+    --text-main: #f7fafc;แ
 }
 
 body {
